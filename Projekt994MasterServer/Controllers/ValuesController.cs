@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Projekt994MasterServer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,8 @@ namespace Projekt994MasterServer.Controllers
 {
     public class ValuesController : ApiController
     {
+
+        ServerData Data = new ServerData();
         // GET api/values
         public IEnumerable<string> Get()
         {
@@ -16,9 +19,9 @@ namespace Projekt994MasterServer.Controllers
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public ServerData Get(int id)
         {
-            return "value";
+            return Data;
         }
 
         // POST api/values
