@@ -8,32 +8,37 @@ using System.Web.Http;
 
 namespace Projekt994MasterServer.Controllers
 {
-    public class ValuesController : ApiController
+    public class HostController : ApiController
     {
-
-        // GET api/values
+        // GET: api/Host
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
-        public int Get(int id)
+        // GET: api/Host/5
+        public ServerData Get(int id)
         {
-            return 1;
+
+            ServerData Data = new ServerData();
+
+            return Data;
         }
 
-        // POST api/values
+        // POST: api/Host
         public void Post(ServerData Data)
         {
+            //Data.ServerName = "This is a test";
+            DatabaseInterface DB = new DatabaseInterface();
+            DB.PostData(Data);
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/Host/5
+        public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE: api/Host/5
         public void Delete(int id)
         {
         }
