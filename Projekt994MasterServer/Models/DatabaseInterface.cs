@@ -27,15 +27,22 @@ namespace Projekt994MasterServer.Models
         {
             try
             {
-
                 SqlConnection.Open();
 
-                MySqlCommand Command = new MySqlCommand("AddServerEntry", SqlConnection); 
+                //Check for existing current ip address
+                MySqlCommand Command = new MySqlCommand("DeleteServerEntry", SqlConnection);
+                Command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
+
+                Command.ExecuteNonQuery();
+
+                //Creates new server data entry
+                Command = new MySqlCommand("AddServerEntry", SqlConnection); 
                 Command.CommandType = System.Data.CommandType.StoredProcedure;
 
                 Random Random = new Random();
                 int ServerID = Random.Next(1, 2000000000);
-
 
                 Command.Parameters.AddWithValue("_ServerID", ServerID);
                 Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
@@ -68,7 +75,7 @@ namespace Projekt994MasterServer.Models
                 MySqlCommand Command = new MySqlCommand("DeleteServerEntry", SqlConnection);
                 Command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                Command.Parameters.AddWithValue("_ServerID", ServerID);
+                Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
 
                 Command.ExecuteNonQuery();
                 SqlConnection.Close();
