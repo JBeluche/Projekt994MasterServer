@@ -15,6 +15,13 @@ namespace Projekt994MasterServer.Models
 
             SqlConnection = new MySqlConnection(ConnectionString);
         }
+        public string GetUserIPAddress()
+        {
+            string IP = System.Web.HttpContext.Current.Request.UserHostAddress;
+            if (IP == "::1")
+                IP = "127.0.0.1";
+            return IP;
+        }
 
         public int PostData(ServerData Data)
         {
@@ -31,9 +38,9 @@ namespace Projekt994MasterServer.Models
 
 
                 Command.Parameters.AddWithValue("_ServerID", ServerID);
-                Command.Parameters.AddWithValue("_IPAddress", Data.IPAddress);
+                Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
                 Command.Parameters.AddWithValue("_ServerName", Data.ServerName);
-                Command.Parameters.AddWithValue("_MapName", Data.IPAddress);
+                Command.Parameters.AddWithValue("_MapName", Data.MapName);
                 Command.Parameters.AddWithValue("_CurrentPlayers", Data.CurrentPlayers);
                 Command.Parameters.AddWithValue("_MaxPlayers", Data.MaxPlayers);
 
