@@ -26,11 +26,11 @@ namespace Projekt994MasterServer.Controllers
         }
 
         // POST: api/Host
-        public void Post(ServerData Data)
+        public int Post(ServerData Data)
         {
             //Data.ServerName = "This is a test";
             DatabaseInterface DB = new DatabaseInterface();
-            DB.PostData(Data);
+            return DB.PostData(Data);
         }
 
         // PUT: api/Host/5
@@ -41,6 +41,8 @@ namespace Projekt994MasterServer.Controllers
         // DELETE: api/Host/5
         public void Delete(int id)
         {
+            DatabaseInterface DB = new DatabaseInterface();
+            DB.DeleteData(id);
         }
     }
 }

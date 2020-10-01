@@ -41,7 +41,7 @@ namespace Projekt994MasterServer.Models
 
                 SqlConnection.Close();
 
-                return 999;
+                return ServerID;
             }
             catch (Exception e)
             {
@@ -49,6 +49,27 @@ namespace Projekt994MasterServer.Models
 
                 return -1;
 
+            }
+        }
+
+        public void DeleteData(int ServerID)
+        {
+            try
+            {
+                SqlConnection.Open();
+
+                MySqlCommand Command = new MySqlCommand("DeleteServerEntry", SqlConnection);
+                Command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                Command.Parameters.AddWithValue("_ServerID", ServerID);
+
+                Command.ExecuteNonQuery();
+                SqlConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e);
             }
         }
 
