@@ -1,9 +1,5 @@
 ﻿using Projekt994MasterServer.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Data;
 using System.Web.Http;
 
 namespace Projekt994MasterServer.Controllers
@@ -11,9 +7,10 @@ namespace Projekt994MasterServer.Controllers
     public class HostController : ApiController
     {
         // GET: api/Host
-        public IEnumerable<string> Get()
+        public DataTable Get()
         {
-            return new string[] { "value1", "value2" };
+            DatabaseInterface DB = new DatabaseInterface();
+            return DB.GetAllServers();
         }
 
         // GET: api/Host/5

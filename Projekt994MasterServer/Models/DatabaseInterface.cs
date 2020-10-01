@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
@@ -87,5 +88,31 @@ namespace Projekt994MasterServer.Models
             }
         }
 
+        public DataTable GetAllServers()
+        {
+
+            try
+            {
+                SqlConnection.Open();
+
+                MySqlCommand Command = new MySqlCommand("GetAllServerEntries", SqlConnection);
+                Command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                DataTable DT = new DataTable();
+                DT.Load(Command.ExecuteReader());
+
+                Command.ExecuteNonQuery();
+                SqlConnection.Close();
+
+                return DT;
+
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e);
+                return new DataTable();
+            }
+
+        }
     }
 }
