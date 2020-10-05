@@ -114,5 +114,37 @@ namespace Projekt994MasterServer.Models
             }
 
         }
+
+        public void UpdateServerEntry(ServerData Data)
+        {
+            try
+            {
+                SqlConnection.Open();
+
+                //Creates new server data entry
+                MySqlCommand Command = new MySqlCommand("UpdateServerEntry", SqlConnection);
+                Command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                Random Random = new Random();
+                int ServerID = Random.Next(1, 2000000000);
+
+                Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
+                Command.Parameters.AddWithValue("_ServerName", Data.ServerName);
+                Command.Parameters.AddWithValue("_MapName", Data.MapName);
+                Command.Parameters.AddWithValue("_CurrentPlayers", Data.CurrentPlayers);
+                Command.Parameters.AddWithValue("_MaxPlayers", Data.MaxPlayers);
+
+                Command.ExecuteNonQuery();
+
+                SqlConnection.Close();
+
+            }
+            catch (Exception e)
+            {
+                Console.Out.WriteLine(e);
+
+
+            }
+        }
     }
 }

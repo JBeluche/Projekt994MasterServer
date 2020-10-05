@@ -31,8 +31,10 @@ namespace Projekt994MasterServer.Controllers
         }
 
         // PUT: api/Host/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, ServerData Data)
         {
+            DatabaseInterface DB = new DatabaseInterface();
+            DB.UpdateServerEntry(Data);
         }
 
         // DELETE: api/Host/5
