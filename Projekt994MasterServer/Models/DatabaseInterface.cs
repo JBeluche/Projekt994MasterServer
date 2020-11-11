@@ -12,7 +12,7 @@ namespace Projekt994MasterServer.Models
         private MySqlConnection SqlConnection;
         public DatabaseInterface()
         {
-            string ConnectionString = "server=127.0.0.1;uid=jbeluche;pwd=Le13$monde;database=projekt994_data;";
+            string ConnectionString = "server=den1.mysql5.gear.host;uid=projekt994data;pwd=Wn6L1kQ9_j!S;database=projekt994data;";
 
             SqlConnection = new MySqlConnection(ConnectionString);
         }
@@ -125,8 +125,7 @@ namespace Projekt994MasterServer.Models
                 MySqlCommand Command = new MySqlCommand("UpdateServerEntry", SqlConnection);
                 Command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                Random Random = new Random();
-                int ServerID = Random.Next(1, 2000000000);
+               
 
                 Command.Parameters.AddWithValue("_IPAddress", GetUserIPAddress());
                 Command.Parameters.AddWithValue("_ServerName", Data.ServerName);
